@@ -4,6 +4,8 @@ import requests
 import json
 import plotly.express as px
 
+from lda_models import model_result
+
 st.title("Project methodology")
 
 st.header('Preprocessing')
@@ -105,5 +107,12 @@ title="Evolution des sujets par année")
 st.plotly_chart(hist)
 st.plotly_chart(line)
 
+st.title('Model test on unknown variable: ')
 
-st.text_input("Rentrez le titre d'un article de journal")
+
+unknown_text=st.text_input("Rentrez le titre d'un article de journal")
+
+topic, result=model_result(unknown_text)
+
+st.markdown(f"__Topic Name :__ {topic.capitalize()}")
+st.subheader(result)
