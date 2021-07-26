@@ -4,14 +4,77 @@ import requests
 import json
 import plotly.express as px
 
+st.title("Project methodology")
+
+st.header('Preprocessing')
+
+st.markdown(""" 
+* __Corpus__ : L'ensemble des textes 
+* __Document__ : Element unique au sein d'un corpus 
+* __Tokeniser__ :  transformer les documents en une liste de caracteres (mot d'une phrase par exemple)  
+            """) 
+
+st.subheader('1. Tokenisation')
+st.markdown(""" 
+Premiere étape du projet nécessaire pour appliquer les transformations suivantes
+ """)
+
+st.subheader('2.a Stemming ')
+st.markdown(""" 
+Permet de réduire les mots et de les standardiser en enlevant les __préfixes__ et les __suffixes__
+ """)
+
+st.subheader('2.b Lemmatisation ')
+st.markdown(""" 
+__ Méthode utilisée sur ce projet:__ Permet de standardiser les mots en ne gardant que la __racine__
+ """)
+
+st.subheader('3. StopWords ')
+st.markdown(""" 
+Module nltk permettant d'obtenir une liste de mots sans valeur informative puis de supprimer ceux-ci 
+ """) 
+st.code('from nltk.corpus import stopwords')
+
+st.subheader('4. Preprocessing manuel ')
+st.markdown(""" 
+* Suppression des mots de moins de 3 caracteres
+* Mise en minuscule de tout le corpus 
+* Suppression de la ponctuation 
+
+ """) 
+
+st.header('Model')
+
+st.subheader('1. TF-IDF ')
+
+st.markdown(""" 
+Le TF-IDF est une méthode de pondération souvent utilisée en recherche d'information et en particulier dans la fouille de textes.
+Cette mesure statistique permet d'évaluer l'importance d'un terme contenu dans un document, relativement à une collection ou un corpus.
+
+Le poids augmente proportionnellement au nombre d'occurrences du mot dans le document. La méthode donne plus de poids aux termes les moins fréquents du corpus considérés 
+comme plus discriminants.
+ """) 
+
+st.image('./images/TFIDF.png')
+
+st.subheader('2. Latent Dirichlet Allocation ')
+
+st.markdown(""" 
+Modele probabiliste permettant de clusturiser un corpus de documents. 
+ """) 
+
+st.image('./images/lda.png')
+
+# st.text_area("Merci d'entrer une phrase en anglais : ")
+
 st.title("Représentation graphique des résultats obtenus par le modèle LDA-TFID")
 
 # Requête en boucle sur l'API
 publish_date = []
 sentence = []
-score=[]
+score = []    
 topics_name = []
-year=[]
+year = []
 count = 1
 for i in range(0,10):
     data = requests.get(f"https://lda-tfidf-api.herokuapp.com/data/data{count}")
